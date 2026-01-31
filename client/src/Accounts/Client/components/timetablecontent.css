@@ -1,143 +1,151 @@
-/* TimetablesContent.css */
-.clac-timetables-content {
+/* timetablecontent.css */
+
+/* ===== TIMETABLE CONTENT STYLES ===== */
+.tt-overall-container {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-md);
+  animation: tt-fadeIn 0.4s ease-out;
 }
 
-.clac-section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-lg);
+@keyframes tt-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.clac-primary-btn {
-  background: var(--primary-gradient);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  padding: 8px 16px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-normal);
+/* ===== HEADER ===== */
+.tt-header {
+  margin-bottom: var(--spacing-sm);
 }
 
-.clac-primary-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-.clac-timetable-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.clac-timetable-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--spacing-md);
-  background: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
-}
-
-.clac-timetable-card:hover {
-  border-color: var(--primary-light);
-  box-shadow: var(--shadow-sm);
-}
-
-.clac-timetable-info {
-  flex: 1;
-}
-
-.clac-timetable-name {
-  font-size: 1rem;
-  font-weight: 600;
+.tt-title {
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--text-color);
   margin-bottom: 4px;
 }
 
-.clac-timetable-meta {
-  display: flex;
-  gap: var(--spacing-sm);
-  font-size: 0.75rem;
+.tt-subtitle {
+  font-size: 0.875rem;
   color: var(--text-secondary);
 }
 
-.clac-timetable-actions {
+/* ===== TABS CONTAINER ===== */
+.tt-tabs-container {
   display: flex;
-  gap: var(--spacing-sm);
-  align-items: center;
-}
-
-.clac-status-badge {
-  padding: 2px 8px;
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.clac-status-active {
-  background: rgba(56, 176, 0, 0.1);
-  color: var(--success-color);
-}
-
-.clac-status-draft {
-  background: rgba(255, 183, 3, 0.1);
-  color: var(--warning-color);
-}
-
-.clac-status-pending {
-  background: rgba(230, 57, 70, 0.1);
-  color: var(--error-color);
-}
-
-.clac-timetable-grid {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border-color);
+  gap: 2px;
+  background: var(--surface-color);
   border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: var(--spacing-md);
+  position: relative;
   overflow: hidden;
 }
 
-.clac-timetable-header {
-  display: grid;
-  grid-template-columns: 100px repeat(5, 1fr);
-  background: var(--surface-color);
+.tt-tab-indicator {
+  position: absolute;
+  height: calc(100% - 8px);
+  background: var(--bg-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.tt-tab {
+  flex: 1;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-sm);
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tt-tab:hover {
+  color: var(--primary-color);
+}
+
+.tt-tab.active {
+  color: var(--primary-color);
   font-weight: 600;
 }
 
-.clac-timetable-row {
-  display: grid;
-  grid-template-columns: 100px repeat(5, 1fr);
-  border-top: 1px solid var(--border-color);
+/* ===== CONTENT AREA ===== */
+.tt-content-area {
+  background: var(--bg-color);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  animation: tt-contentSlide 0.3s ease-out;
 }
 
-.clac-time-slot,
-.clac-day-header,
-.clac-period-cell {
-  padding: 12px;
-  border-right: 1px solid var(--border-color);
-  min-height: 60px;
+@keyframes tt-contentSlide {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.clac-day-header {
-  text-align: center;
-  font-size: 0.875rem;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .tt-tabs-container {
+    flex-direction: column;
+    gap: 1px;
+  }
+  
+  .tt-tab-indicator {
+    display: none;
+  }
+  
+  .tt-tab {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0;
+  }
+  
+  .tt-tab:last-child {
+    border-bottom: none;
+  }
+  
+  .tt-tab.active {
+    background: var(--primary-extra-light);
+    border-left: 3px solid var(--primary-color);
+  }
 }
 
-.clac-period-cell {
-  font-size: 0.875rem;
-  color: var(--text-color);
-}
-
-.clac-period-cell:last-child,
-.clac-time-slot:last-child,
-.clac-day-header:last-child {
-  border-right: none;
+@media (max-width: 480px) {
+  .tt-title {
+    font-size: 1.25rem;
+  }
+  
+  .tt-subtitle {
+    font-size: 0.8125rem;
+  }
+  
+  .tt-tab {
+    font-size: 0.75rem;
+    padding: 10px 12px;
+  }
 }
