@@ -449,3 +449,53 @@
     font-size: 1.125rem;
   }
 }
+
+
+
+
+/* Add this to your existing contact.css */
+
+/* ===== PHONE FORMAT NOTE ===== */
+.contact-format-note {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  opacity: 0.8;
+  animation: fadeIn var(--transition-normal) forwards;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+.contact-format-note p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE UPDATES ===== */
+@media (max-width: 768px) {
+  .contact-format-note {
+    font-size: 0.85rem;
+  }
+  
+  .contact-channel-info {
+    font-size: 1rem;
+    word-break: break-word;
+  }
+}

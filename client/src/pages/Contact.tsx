@@ -2,17 +2,24 @@
 import './contact.css';
 
 function Contact() {
+  const phoneNumber = '0758420860';
+  const fullPhoneNumber = '+254758420860'; // Kenya country code
+  
   // Function to handle WhatsApp click
   const handleWhatsAppClick = () => {
-    const phone = '0758420860';
     const message = 'Hello! I need assistance with...';
-    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${fullPhoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
   // Function to handle phone call
   const handlePhoneClick = () => {
-    window.location.href = 'tel:+255758420860';
+    window.location.href = `tel:${fullPhoneNumber}`;
+  };
+
+  // Function to handle phone call with local format
+  const handleLocalPhoneClick = () => {
+    window.location.href = `tel:${phoneNumber}`;
   };
 
   // Function to handle email click
@@ -70,7 +77,7 @@ function Contact() {
             >
               <div className="contact-channel-icon">💬</div>
               <h3>WhatsApp Chat</h3>
-              <div className="contact-channel-info">0758420860</div>
+              <div className="contact-channel-info">+254 758 420 860</div>
               <span className="contact-channel-action">Chat Now →</span>
             </div>
 
@@ -82,7 +89,7 @@ function Contact() {
             >
               <div className="contact-channel-icon">📞</div>
               <h3>Direct Call</h3>
-              <div className="contact-channel-info">0758420860</div>
+              <div className="contact-channel-info">+254 758 420 860</div>
               <span className="contact-channel-action">Call Now →</span>
             </div>
 
@@ -97,6 +104,11 @@ function Contact() {
               <div className="contact-channel-info">davismugoikou@gmail.com</div>
               <span className="contact-channel-action">Send Email →</span>
             </div>
+          </div>
+
+          {/* Local format note */}
+          <div className="contact-format-note">
+            <p>📱 Local format: 0758 420 860 (Kenya)</p>
           </div>
         </section>
 
@@ -113,40 +125,6 @@ function Contact() {
             ⚡ Priority response for urgent issues
           </div>
         </section>
-
-        {/* Social & Additional Info */}
-        {/* <section className="contact-cta">
-          <p className="contact-cta-text">
-            Prefer social media? Connect with us for updates and general inquiries
-          </p>
-          
-          <div className="contact-social-links">
-            <a 
-              href="https://twitter.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="contact-social-link"
-            >
-              𝕏
-            </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="contact-social-link"
-            >
-              in
-            </a>
-            <a 
-              href="https://facebook.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="contact-social-link"
-            >
-              f
-            </a>
-          </div>
-        </section> */}
       </div>
     </div>
   );
