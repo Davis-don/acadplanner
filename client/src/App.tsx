@@ -6,6 +6,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Newaccount from './pages/Newaccount'
 import Login from './pages/Login'
+import Clientaccount from './Accounts/Client/pages/Clientaccount'
 function App() {
   return (
    <div className="overall-app-container">
@@ -16,6 +17,10 @@ function App() {
         <Route path="/contact" element={<Mainlayout><Contact /></Mainlayout>} />
         <Route path="/signup" element={<Newaccount />} />
         <Route path="/login" element={<Login />} />
+
+
+        {/* Protected Routes */}
+        <Route path="/client-account" element={<Clientaccount />} />
       </Routes>
     </BrowserRouter>
    </div>

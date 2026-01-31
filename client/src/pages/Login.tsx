@@ -2,6 +2,7 @@
 import './login.css';
 import { useState } from 'react';
 import type { FormEvent, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -30,6 +31,9 @@ function Login() {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
   };
+
+
+  const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors: typeof errors = {};
@@ -175,6 +179,7 @@ function Login() {
               type="submit"
               className="lgn-submit-btn"
               disabled={isSubmitting}
+              onClick={()=>navigate('/client-account')}
             >
               {isSubmitting ? (
                 <>
