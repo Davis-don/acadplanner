@@ -1,0 +1,469 @@
+/* ===== SIDEBAR BASE STYLES ===== */
+.acadplanner-sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  height: 100vh;
+  z-index: 1001;
+  transform: translateX(100%);
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.acadplanner-sidebar-visible {
+  transform: translateX(0);
+}
+
+.acadplanner-sidebar-container {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-xl);
+}
+
+/* Backdrop */
+.acadplanner-sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.acadplanner-backdrop-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== HEADER SECTION ===== */
+.acadplanner-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.acadplanner-sidebar-brand {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.acadplanner-sidebar-brand:hover {
+  transform: translateX(5px);
+}
+
+.acadplanner-sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.acadplanner-sidebar-logo-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs);
+  box-shadow: var(--shadow-md);
+}
+
+.acadplanner-sidebar-logo-icon svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.acadplanner-sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.acadplanner-sidebar-brand-name {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+}
+
+.acadplanner-sidebar-brand-word-acad {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.acadplanner-sidebar-brand-word-planner {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  margin-left: 2px;
+}
+
+.acadplanner-sidebar-brand-tagline {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin: var(--spacing-xs) 0 0 0;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+/* Close Button */
+.acadplanner-sidebar-close {
+  width: 40px;
+  height: 40px;
+  background: var(--surface-color);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+  padding: 0;
+  margin: 0;
+}
+
+.acadplanner-sidebar-close:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.acadplanner-sidebar-close-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== DIVIDER ===== */
+.acadplanner-sidebar-divider {
+  display: flex;
+  align-items: center;
+  margin: var(--spacing-lg) 0 var(--spacing-xl);
+  position: relative;
+}
+
+.acadplanner-sidebar-divider::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+
+.acadplanner-sidebar-divider-text {
+  padding: 0 var(--spacing-md);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  background: var(--surface-color);
+}
+
+/* ===== NAVIGATION ===== */
+.acadplanner-sidebar-nav {
+  flex: 1;
+  margin-bottom: var(--spacing-xl);
+}
+
+.acadplanner-sidebar-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.acadplanner-sidebar-nav-item {
+  opacity: 0;
+  transform: translateX(30px);
+  animation: acadplanner-nav-slide-in 0.5s ease forwards;
+}
+
+@keyframes acadplanner-nav-slide-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.acadplanner-sidebar-nav-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  color: var(--text-color);
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.acadplanner-sidebar-nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--primary-extra-light);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  border-radius: var(--radius-lg);
+}
+
+.acadplanner-sidebar-nav-link:hover {
+  color: var(--primary-color);
+  transform: translateX(8px);
+}
+
+.acadplanner-sidebar-nav-link:hover::before {
+  opacity: 1;
+}
+
+.acadplanner-sidebar-nav-login {
+  background: var(--primary-gradient);
+  color: white !important;
+  margin-top: var(--spacing-lg);
+}
+
+.acadplanner-sidebar-nav-login:hover {
+  background: var(--primary-gradient);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.acadplanner-sidebar-nav-login::before {
+  display: none;
+}
+
+.acadplanner-sidebar-nav-icon {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.acadplanner-sidebar-nav-link:hover .acadplanner-sidebar-nav-icon {
+  transform: scale(1.2);
+}
+
+.acadplanner-sidebar-nav-label {
+  flex: 1;
+  transition: transform 0.3s ease;
+}
+
+.acadplanner-sidebar-nav-link:hover .acadplanner-sidebar-nav-label {
+  transform: translateX(5px);
+}
+
+.acadplanner-sidebar-nav-arrow {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  color: var(--text-light);
+}
+
+.acadplanner-sidebar-nav-link:hover .acadplanner-sidebar-nav-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== FOOTER ===== */
+.acadplanner-sidebar-footer {
+  margin-top: auto;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.acadplanner-sidebar-footer-content {
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.acadplanner-sidebar-footer-text {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.acadplanner-sidebar-footer-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-md);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.acadplanner-sidebar-footer-btn:hover {
+  background: var(--hover-bg);
+  border-color: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.acadplanner-sidebar-footer-icon {
+  font-size: 1rem;
+}
+
+.acadplanner-sidebar-footer-version {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.acadplanner-sidebar-version-text,
+.acadplanner-sidebar-copyright {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+  .acadplanner-sidebar-wrapper {
+    width: 340px;
+  }
+  
+  .acadplanner-sidebar-container {
+    padding: var(--spacing-lg);
+  }
+  
+  .acadplanner-sidebar-brand-word-acad,
+  .acadplanner-sidebar-brand-word-planner {
+    font-size: 1.6rem;
+  }
+}
+
+/* Mobile (480px - 768px) */
+@media (max-width: 768px) {
+  .acadplanner-sidebar-wrapper {
+    width: 320px;
+  }
+  
+  .acadplanner-sidebar-container {
+    padding: var(--spacing-md);
+  }
+  
+  .acadplanner-sidebar-nav-link {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
+/* Small Mobile (≤ 480px) */
+@media (max-width: 480px) {
+  .acadplanner-sidebar-wrapper {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .acadplanner-sidebar-container {
+    padding: var(--spacing-md);
+  }
+  
+  .acadplanner-sidebar-brand-word-acad,
+  .acadplanner-sidebar-brand-word-planner {
+    font-size: 1.4rem;
+  }
+  
+  .acadplanner-sidebar-nav-icon {
+    font-size: 1rem;
+  }
+  
+  .acadplanner-sidebar-nav-label {
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra Small Mobile (≤ 360px) */
+@media (max-width: 360px) {
+  .acadplanner-sidebar-wrapper {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .acadplanner-sidebar-container {
+    padding: var(--spacing-sm);
+  }
+  
+  .acadplanner-sidebar-brand-word-acad,
+  .acadplanner-sidebar-brand-word-planner {
+    font-size: 1.2rem;
+  }
+  
+  .acadplanner-sidebar-nav-link {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .acadplanner-sidebar-wrapper,
+  .acadplanner-sidebar-backdrop,
+  .acadplanner-sidebar-nav-item,
+  .acadplanner-sidebar-nav-link,
+  .acadplanner-sidebar-close,
+  .acadplanner-sidebar-brand {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .acadplanner-sidebar-nav-item {
+    opacity: 1;
+    transform: none;
+  }
+}

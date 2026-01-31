@@ -1,0 +1,49 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  --sidebar-width: 280px;
+  --sidebar-transition: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --backdrop-blur: 8px;
+  --backdrop-opacity: 0.4;
+}
+
+/* ===== BASE LAYOUT ===== */
+.overall-main-layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Main content wrapper */
+.main-content-wrapper {
+  flex: 1;
+  transition: filter var(--sidebar-transition);
+  position: relative;
+  z-index: 1;
+}
+
+/* When sidebar is open */
+.sidebar-open .main-content-wrapper {
+  filter: blur(var(--backdrop-blur));
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Backdrop overlay */
+.sidebar-open::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, var(--backdrop-opacity));
+  z-index: 999;
+  pointer-events: none;
+}
+
+/* Ensure content stays accessible when sidebar is closed */
+.overall-main-layout-container:not(.sidebar-open) .sidebar-backdrop {
+  display: none;
+}

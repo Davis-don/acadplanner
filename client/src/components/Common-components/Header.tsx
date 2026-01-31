@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSidebarStore } from '../../store/useSidebar';
 import './header.css';
 
 interface HeaderProps {
@@ -7,12 +8,11 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { toggleSidebar } = useSidebarStore();
   
   const handleMenuClick = () => {
-    setIsMenuOpen(!isMenuOpen);
-    alert("Sidebar will open here later! Implementing with Zustand store.");
+    toggleSidebar();
   };
   
   const handleLogoClick = () => {
@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = () => {
         
         {/* Mobile Menu Button */}
         <button 
-          className={`mobile-menu-btn ${isMenuOpen ? 'active' : ''}`}
+          className="mobile-menu-btn"
           onClick={handleMenuClick}
           aria-label="Open sidebar menu"
         >
