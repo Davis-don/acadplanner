@@ -5,6 +5,7 @@ import Homepage from './pages/Homepage'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Newaccount from './pages/Newaccount'
+import Login from './pages/Login'
 function App() {
   return (
    <div className="overall-app-container">
@@ -14,6 +15,7 @@ function App() {
         <Route path="/about" element={<Mainlayout><About /></Mainlayout>} />
         <Route path="/contact" element={<Mainlayout><Contact /></Mainlayout>} />
         <Route path="/signup" element={<Newaccount />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
    </div>
