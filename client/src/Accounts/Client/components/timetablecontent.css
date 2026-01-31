@@ -1,0 +1,143 @@
+/* TimetablesContent.css */
+.clac-timetables-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.clac-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.clac-primary-btn {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.clac-primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.clac-timetable-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.clac-timetable-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.clac-timetable-card:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.clac-timetable-info {
+  flex: 1;
+}
+
+.clac-timetable-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 4px;
+}
+
+.clac-timetable-meta {
+  display: flex;
+  gap: var(--spacing-sm);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.clac-timetable-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.clac-status-badge {
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.clac-status-active {
+  background: rgba(56, 176, 0, 0.1);
+  color: var(--success-color);
+}
+
+.clac-status-draft {
+  background: rgba(255, 183, 3, 0.1);
+  color: var(--warning-color);
+}
+
+.clac-status-pending {
+  background: rgba(230, 57, 70, 0.1);
+  color: var(--error-color);
+}
+
+.clac-timetable-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.clac-timetable-header {
+  display: grid;
+  grid-template-columns: 100px repeat(5, 1fr);
+  background: var(--surface-color);
+  font-weight: 600;
+}
+
+.clac-timetable-row {
+  display: grid;
+  grid-template-columns: 100px repeat(5, 1fr);
+  border-top: 1px solid var(--border-color);
+}
+
+.clac-time-slot,
+.clac-day-header,
+.clac-period-cell {
+  padding: 12px;
+  border-right: 1px solid var(--border-color);
+  min-height: 60px;
+}
+
+.clac-day-header {
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.clac-period-cell {
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+
+.clac-period-cell:last-child,
+.clac-time-slot:last-child,
+.clac-day-header:last-child {
+  border-right: none;
+}
