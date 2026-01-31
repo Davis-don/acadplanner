@@ -1,0 +1,153 @@
+/* welcomecomponent.css */
+
+/* ===== WELCOME COMPONENT STYLES ===== */
+.wc-container {
+  background: var(--primary-gradient);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xxl);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: var(--spacing-xl);
+  animation: wc-slideIn 1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-lg);
+}
+
+@keyframes wc-slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wc-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+}
+
+.wc-content {
+  position: relative;
+  z-index: 1;
+}
+
+.wc-greeting {
+  font-size: 1.125rem;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-bottom: var(--spacing-xs);
+  animation: wc-fadeInUp 0.6s ease-out 0.3s both;
+}
+
+@keyframes wc-fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+.wc-name {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: var(--spacing-sm);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  animation: wc-fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.wc-message {
+  font-size: 1rem;
+  opacity: 0.85;
+  max-width: 500px;
+  animation: wc-fadeInUp 0.6s ease-out 0.5s both;
+}
+
+/* Decorative elements */
+.wc-decoration {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.15;
+}
+
+.wc-circle-1 {
+  width: 120px;
+  height: 120px;
+  background: white;
+  border-radius: 50%;
+  top: -40px;
+  right: -40px;
+  animation: wc-pulse 4s ease-in-out infinite;
+}
+
+.wc-circle-2 {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+  bottom: -20px;
+  left: 10%;
+  animation: wc-pulse 4s ease-in-out infinite 1s;
+}
+
+@keyframes wc-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .wc-container {
+    padding: var(--spacing-xl);
+  }
+  
+  .wc-name {
+    font-size: 2rem;
+  }
+  
+  .wc-message {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wc-container {
+    padding: var(--spacing-lg);
+  }
+  
+  .wc-name {
+    font-size: 1.75rem;
+  }
+  
+  .wc-greeting {
+    font-size: 1rem;
+  }
+  
+  .wc-circle-1 {
+    width: 80px;
+    height: 80px;
+    top: -20px;
+    right: -20px;
+  }
+  
+  .wc-circle-2 {
+    width: 60px;
+    height: 60px;
+  }
+}

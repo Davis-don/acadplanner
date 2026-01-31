@@ -111,9 +111,9 @@ function Clientaccount() {
                   >
                     <span className="clac-nav-icon">{item.icon}</span>
                     <span className="clac-nav-label">{item.label}</span>
-                    {item.badge && (
+                    {/* {item.badge && (
                       <span className="clac-nav-badge">{item.badge}</span>
-                    )}
+                    )} */}
                   </button>
                 </li>
               ))}

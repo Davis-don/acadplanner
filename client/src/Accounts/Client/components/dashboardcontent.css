@@ -1,146 +1,20 @@
-/* DashboardContent.css */
-.clac-dashboard-content {
+/* dashboardcontent.css */
+
+/* ===== DASHBOARD CONTENT STYLES ===== */
+.db-overall-container {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+  animation: db-fadeIn 0.8s ease-out;
 }
 
-.clac-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-lg);
-}
-
-.clac-stat-card {
-  background: var(--surface-color);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  border: 1px solid var(--border-color);
-  transition: transform var(--transition-normal);
-}
-
-.clac-stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.clac-stat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-md);
-}
-
-.clac-stat-icon {
-  font-size: 1.5rem;
-}
-
-.clac-stat-change {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--success-color);
-  background: rgba(56, 176, 0, 0.1);
-  padding: 2px 8px;
-  border-radius: var(--radius-full);
-}
-
-.clac-stat-value {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-color);
-  margin-bottom: 4px;
-}
-
-.clac-stat-label {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-}
-
-.clac-section {
-  background: var(--surface-color);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  border: 1px solid var(--border-color);
-}
-
-.clac-section-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: var(--spacing-lg);
-}
-
-.clac-activities-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.clac-activity-item {
-  display: flex;
-  gap: var(--spacing-md);
-  padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.clac-activity-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.clac-activity-time {
-  font-size: 0.75rem;
-  color: var(--text-light);
-  min-width: 80px;
-}
-
-.clac-activity-details {
-  flex: 1;
-}
-
-.clac-activity-text {
-  font-size: 0.875rem;
-  color: var(--text-color);
-  margin-bottom: 2px;
-}
-
-.clac-activity-user {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.clac-actions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: var(--spacing-md);
-}
-
-.clac-action-btn {
-  background: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-sm);
-  cursor: pointer;
-  transition: all var(--transition-normal);
-}
-
-.clac-action-btn:hover {
-  background: var(--primary-extra-light);
-  border-color: var(--primary-color);
-  transform: translateY(-2px);
-}
-
-.clac-action-icon {
-  font-size: 1.5rem;
-}
-
-.clac-action-label {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--text-color);
+@keyframes db-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
