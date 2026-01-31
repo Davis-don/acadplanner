@@ -1,0 +1,234 @@
+/* walletbalance.css */
+
+/* ===== WALLET BALANCE HEADER STYLES ===== */
+.wb-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: wb-fadeIn 0.4s ease-out;
+}
+
+@keyframes wb-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== WALLET PILL ===== */
+.wb-balance-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, 
+    rgba(67, 97, 238, 0.1) 0%, 
+    rgba(114, 9, 183, 0.05) 100%);
+  border: 1.5px solid var(--primary-color);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.wb-balance-pill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--primary-gradient);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.wb-balance-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
+}
+
+.wb-balance-pill:hover::before {
+  opacity: 0.05;
+}
+
+/* ===== CURRENCY SYMBOL ===== */
+.wb-currency-symbol {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 0.75rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wb-wallet-icon {
+  font-size: 0.6875rem;
+  opacity: 0.8;
+}
+
+/* ===== BALANCE AMOUNT ===== */
+.wb-balance {
+  color: var(--text-color);
+  font-weight: 700;
+  font-size: 0.875rem;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.2px;
+}
+
+/* ===== ADD FUNDS BUTTON ===== */
+.wb-add-btn {
+  width: 24px;
+  height: 24px;
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  flex-shrink: 0;
+}
+
+.wb-add-btn:hover {
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+}
+
+/* ===== BALANCE PULSE ANIMATION ===== */
+@keyframes wb-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.wb-pulse {
+  animation: wb-pulse 0.3s ease-in-out;
+}
+
+/* ===== TOOLTIP ===== */
+.wb-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.75rem;
+  color: var(--text-color);
+  min-width: 200px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-fast);
+}
+
+.wb-tooltip.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.wb-tooltip-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--primary-color);
+}
+
+.wb-tooltip-balance {
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-bottom: 4px;
+}
+
+.wb-tooltip-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.wb-tooltip-btn {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 0.6875rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.wb-tooltip-btn:hover {
+  background: var(--primary-extra-light);
+  border-color: var(--primary-light);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .wb-container {
+    gap: 6px;
+  }
+  
+  .wb-balance-pill {
+    padding: 3px 8px;
+    gap: 4px;
+  }
+  
+  .wb-balance {
+    font-size: 0.8125rem;
+  }
+  
+  .wb-currency-symbol {
+    font-size: 0.6875rem;
+  }
+  
+  .wb-add-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 0.6875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wb-balance-pill {
+    padding: 2px 6px;
+  }
+  
+  .wb-balance {
+    font-size: 0.75rem;
+  }
+  
+  .wb-currency-symbol span:first-child {
+    display: none;
+  }
+  
+  .wb-currency-symbol {
+    font-size: 0.625rem;
+  }
+  
+  .wb-tooltip {
+    min-width: 180px;
+    right: -50px;
+  }
+}

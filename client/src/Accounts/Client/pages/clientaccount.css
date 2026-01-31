@@ -340,3 +340,48 @@
     font-size: 1.5rem;
   }
 }
+
+
+
+
+/* Add to clientaccount.css - Header section */
+.clac-header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.clac-user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding-left: var(--spacing-md);
+  border-left: 1px solid var(--border-color);
+}
+
+/* Remove the wallet from content area */
+.clac-content-area > .clac-wallet-container {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .clac-header-right {
+    gap: var(--spacing-sm);
+  }
+  
+  .clac-user-info {
+    border-left: none;
+    padding-left: 0;
+  }
+  
+  .clac-user-name {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .clac-header-right {
+    gap: 6px;
+  }
+}

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import DashboardContent from '../components/Dashboardcontent';
 import TimetablesContent from '../components/Timetablecontent';
 import ProfileContent from '../components/Profilecontent';
+import Walletbalance from '../components/Walletbalance';
 
 // Define the type for navigation items
 type NavItem = {
@@ -79,6 +80,9 @@ function Clientaccount() {
         </div>
         
         <div className="clac-header-right">
+          {/* Wallet Balance in Header */}
+          <Walletbalance />
+          
           <div className="clac-user-info">
             <div className="clac-avatar">JD</div>
             <span className="clac-user-name">John Doe</span>
@@ -111,9 +115,9 @@ function Clientaccount() {
                   >
                     <span className="clac-nav-icon">{item.icon}</span>
                     <span className="clac-nav-label">{item.label}</span>
-                    {/* {item.badge && (
+                    {item.badge && (
                       <span className="clac-nav-badge">{item.badge}</span>
-                    )} */}
+                    )}
                   </button>
                 </li>
               ))}
