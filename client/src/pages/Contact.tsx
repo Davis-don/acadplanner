@@ -18,9 +18,9 @@ function Contact() {
   };
 
   // Function to handle phone call with local format
-  const handleLocalPhoneClick = () => {
-    window.location.href = `tel:${phoneNumber}`;
-  };
+  // const handleLocalPhoneClick = () => {
+  //   window.location.href = `tel:${phoneNumber}`;
+  // };
 
   // Function to handle email click
   const handleEmailClick = () => {
