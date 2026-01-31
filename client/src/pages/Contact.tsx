@@ -2,7 +2,7 @@
 import './contact.css';
 
 function Contact() {
-  const phoneNumber = '0758420860';
+  // const phoneNumber = '0758420860';
   const fullPhoneNumber = '+254758420860'; // Kenya country code
   
   // Function to handle WhatsApp click
