@@ -6,6 +6,9 @@ import { useToast } from '../../../store/useToaststore';
 import DashboardContent from '../components/Dashboardcontent';
 import TimetablesContent from '../components/Timetablecontent';
 import ProfileContent from '../components/Profilecontent';
+import ClassesContent from '../components/Classcontent';
+import SubjectsContent from '../components/Subjectcontent';
+import TeachersContent from '../components/Teacherscontent';
 import Walletbalance from '../components/Walletbalance';
 
 // Define the type for navigation items
@@ -25,7 +28,7 @@ function Clientaccount() {
   const { showToast } = useToast();
   const navigate = useNavigate();
 
-  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  const apiUrl = import.meta.env.VITE_API_URL ;
 
   // Logout mutation using TanStack Query
   const logoutMutation = useMutation({
@@ -70,7 +73,7 @@ function Clientaccount() {
     },
   });
 
-  // Navigation items configuration
+  // Navigation items configuration with all components
   const navItems: NavItem[] = [
     { 
       id: 'dashboard', 
@@ -78,6 +81,28 @@ function Clientaccount() {
       icon: '📊', 
       component: DashboardContent,
       badge: 3,
+      requiresAuth: true
+    },
+    { 
+      id: 'classes', 
+      label: 'Classes', 
+      icon: '🏫', 
+      component: ClassesContent,
+      badge: 2,
+      requiresAuth: true
+    },
+    { 
+      id: 'subjects', 
+      label: 'Subjects', 
+      icon: '📚', 
+      component: SubjectsContent,
+      requiresAuth: true
+    },
+    { 
+      id: 'teachers', 
+      label: 'Teachers', 
+      icon: '👨‍🏫', 
+      component: TeachersContent,
       requiresAuth: true
     },
     { 
@@ -129,6 +154,26 @@ function Clientaccount() {
   const ActiveComponent = navItems.find(item => item.id === activeTab)?.component || DashboardContent;
   const isLoggingOut = logoutMutation.isPending;
 
+  // Get the subtitle based on active tab
+  const getSubtitle = () => {
+    switch (activeTab) {
+      case 'dashboard':
+        return 'Overview of your academic planning activities';
+      case 'classes':
+        return 'Manage and organize your classes and sections';
+      case 'subjects':
+        return 'View and manage all academic subjects';
+      case 'teachers':
+        return 'Browse and manage teacher information';
+      case 'timetables':
+        return 'Manage and view your timetables';
+      case 'profile':
+        return 'Update your personal information and settings';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className="clac-overall-container">
       
@@ -169,11 +214,33 @@ function Clientaccount() {
         <aside className={`clac-sidebar ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <div className="clac-sidebar-header">
             <h2 className="clac-sidebar-title">Navigation</h2>
+            <p className="clac-sidebar-subtitle">Academic Management</p>
           </div>
           
           <nav className="clac-nav-container">
             <ul className="clac-nav-list">
-              {navItems.map((item) => (
+              {/* Academic Management Section */}
+              <li className="clac-nav-section">
+                <span className="clac-nav-section-label">Management</span>
+              </li>
+              {navItems.filter(item => ['dashboard', 'classes', 'subjects', 'teachers', 'timetables'].includes(item.id)).map((item) => (
+                <li key={item.id} className="clac-nav-item">
+                  <button
+                    className={`clac-nav-link ${activeTab === item.id ? 'active' : ''}`}
+                    onClick={() => handleNavClick(item.id)}
+                    disabled={isLoggingOut}
+                  >
+                    <span className="clac-nav-icon">{item.icon}</span>
+                    <span className="clac-nav-label">{item.label}</span>
+                  </button>
+                </li>
+              ))}
+
+              {/* Account Section */}
+              <li className="clac-nav-section">
+                <span className="clac-nav-section-label">Account</span>
+              </li>
+              {navItems.filter(item => ['profile', 'logout'].includes(item.id)).map((item) => (
                 <li key={item.id} className="clac-nav-item">
                   <button
                     className={`clac-nav-link ${activeTab === item.id ? 'active' : ''} ${item.id === 'logout' && isLoggingOut ? 'logging-out' : ''}`}
@@ -192,19 +259,51 @@ function Clientaccount() {
               ))}
             </ul>
           </nav>
+
+          {/* Sidebar Footer */}
+          <div className="clac-sidebar-footer">
+            <div className="clac-account-summary">
+              <div className="clac-account-role">Client Account</div>
+              <div className="clac-account-plan">Premium Plan</div>
+            </div>
+          </div>
         </aside>
 
         {/* Content Area */}
         <main className="clac-content-area">
           <div className="clac-content-header">
-            <h1 className="clac-content-title">
-              {navItems.find(item => item.id === activeTab)?.label || 'Dashboard'}
-            </h1>
-            <p className="clac-content-subtitle">
-              {activeTab === 'dashboard' && 'Overview of your academic planning activities'}
-              {activeTab === 'timetables' && 'Manage and view your timetables'}
-              {activeTab === 'profile' && 'Update your personal information and settings'}
-            </p>
+            <div className="clac-content-title-row">
+              <h1 className="clac-content-title">
+                {navItems.find(item => item.id === activeTab)?.label || 'Dashboard'}
+              </h1>
+              <div className="clac-content-actions">
+                {/* {activeTab === 'classes' && (
+                  <button className="clac-action-btn">
+                    <span className="clac-action-icon">+</span>
+                    Add Class
+                  </button>
+                )} */}
+                {activeTab === 'subjects' && (
+                  <button className="clac-action-btn">
+                    <span className="clac-action-icon">+</span>
+                    Add Subject
+                  </button>
+                )}
+                {activeTab === 'teachers' && (
+                  <button className="clac-action-btn">
+                    <span className="clac-action-icon">+</span>
+                    Add Teacher
+                  </button>
+                )}
+                {activeTab === 'timetables' && (
+                  <button className="clac-action-btn">
+                    <span className="clac-action-icon">+</span>
+                    Create Timetable
+                  </button>
+                )}
+              </div>
+            </div>
+            <p className="clac-content-subtitle">{getSubtitle()}</p>
           </div>
           
           <div className="clac-content-wrapper">
