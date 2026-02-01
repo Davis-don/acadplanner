@@ -1,6 +1,8 @@
-// Clientaccount.tsx
 import './clientaccount.css';
 import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../../store/useToaststore';
 import DashboardContent from '../components/Dashboardcontent';
 import TimetablesContent from '../components/Timetablecontent';
 import ProfileContent from '../components/Profilecontent';
@@ -13,11 +15,60 @@ type NavItem = {
   icon: string;
   component: React.ComponentType;
   badge?: number;
+  requiresAuth?: boolean;
 };
 
 function Clientaccount() {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false);
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
+  // Logout mutation using TanStack Query
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch(`${apiUrl}/users/logout/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Logout failed');
+      }
+
+      return result;
+    },
+
+    onMutate: () => {
+      showToast('Logging out...', 'info', 2);
+      setShowLogoutModal(false);
+    },
+
+    onSuccess: (data) => {
+      showToast(data.message || 'Logged out successfully!', 'success', 3);
+      
+      // Clear any localStorage items
+      localStorage.removeItem('rememberEmail');
+      
+      // Redirect to login page after a short delay
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
+    },
+
+    onError: (error: Error) => {
+      showToast(error.message || 'Logout failed. Please try again.', 'error', 4);
+    },
+  });
 
   // Navigation items configuration
   const navItems: NavItem[] = [
@@ -26,35 +77,49 @@ function Clientaccount() {
       label: 'Dashboard', 
       icon: '📊', 
       component: DashboardContent,
-      badge: 3
+      badge: 3,
+      requiresAuth: true
     },
     { 
       id: 'timetables', 
       label: 'Timetables', 
       icon: '⏰', 
-      component: TimetablesContent 
+      component: TimetablesContent,
+      requiresAuth: true
     },
     { 
       id: 'profile', 
       label: 'Profile', 
       icon: '👤', 
-      component: ProfileContent 
+      component: ProfileContent,
+      requiresAuth: true
     },
     { 
       id: 'logout', 
       label: 'Logout', 
       icon: '🚪', 
-      component: DashboardContent // Using Dashboard as placeholder
+      component: DashboardContent,
+      requiresAuth: true
     },
   ];
 
   const handleNavClick = (id: string) => {
-    setActiveTab(id);
     if (id === 'logout') {
-      alert('Logout functionality will be implemented soon!');
+      setShowLogoutModal(true);
       return;
     }
+    
+    setActiveTab(id);
     setIsMobileMenuOpen(false);
+  };
+
+  const handleConfirmLogout = () => {
+    if (logoutMutation.isPending) return;
+    logoutMutation.mutate();
+  };
+
+  const handleCancelLogout = () => {
+    setShowLogoutModal(false);
   };
 
   const toggleMobileMenu = () => {
@@ -62,6 +127,7 @@ function Clientaccount() {
   };
 
   const ActiveComponent = navItems.find(item => item.id === activeTab)?.component || DashboardContent;
+  const isLoggingOut = logoutMutation.isPending;
 
   return (
     <div className="clac-overall-container">
@@ -73,6 +139,7 @@ function Clientaccount() {
             className="clac-hamburger-btn" 
             onClick={toggleMobileMenu}
             aria-label="Toggle menu"
+            disabled={isLoggingOut}
           >
             <span className="clac-hamburger-icon">☰</span>
           </button>
@@ -80,7 +147,6 @@ function Clientaccount() {
         </div>
         
         <div className="clac-header-right">
-          {/* Wallet Balance in Header */}
           <Walletbalance />
           
           <div className="clac-user-info">
@@ -93,7 +159,7 @@ function Clientaccount() {
       {/* Mobile Overlay */}
       <div 
         className={`clac-mobile-overlay ${isMobileMenuOpen ? 'mobile-open' : ''}`}
-        onClick={() => setIsMobileMenuOpen(false)}
+        onClick={() => !isLoggingOut && setIsMobileMenuOpen(false)}
       />
 
       {/* Main Layout */}
@@ -110,12 +176,17 @@ function Clientaccount() {
               {navItems.map((item) => (
                 <li key={item.id} className="clac-nav-item">
                   <button
-                    className={`clac-nav-link ${activeTab === item.id ? 'active' : ''}`}
+                    className={`clac-nav-link ${activeTab === item.id ? 'active' : ''} ${item.id === 'logout' && isLoggingOut ? 'logging-out' : ''}`}
                     onClick={() => handleNavClick(item.id)}
+                    disabled={isLoggingOut && item.id !== 'logout'}
                   >
                     <span className="clac-nav-icon">{item.icon}</span>
-                    <span className="clac-nav-label">{item.label}</span>
-                  
+                    <span className="clac-nav-label">
+                      {item.id === 'logout' && isLoggingOut ? 'Logging out...' : item.label}
+                    </span>
+                    {item.id === 'logout' && isLoggingOut && (
+                      <span className="clac-nav-logout-spinner"></span>
+                    )}
                   </button>
                 </li>
               ))}
@@ -153,6 +224,54 @@ function Clientaccount() {
           <span>Last updated: Today</span>
         </div>
       </footer>
+
+      {/* Custom Logout Confirmation Modal */}
+      {showLogoutModal && (
+        <div className="logout-modal-overlay">
+          <div className="logout-modal">
+            <div className="logout-modal-header">
+              <div className="logout-modal-icon">🚪</div>
+              <h3 className="logout-modal-title">Confirm Logout</h3>
+              <button 
+                className="logout-modal-close"
+                onClick={handleCancelLogout}
+                disabled={isLoggingOut}
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className="logout-modal-body">
+              <p>Are you sure you want to log out?</p>
+              <p className="logout-modal-subtext">You'll need to log in again to access your dashboard.</p>
+            </div>
+            
+            <div className="logout-modal-footer">
+              <button
+                className="logout-modal-cancel"
+                onClick={handleCancelLogout}
+                disabled={isLoggingOut}
+              >
+                Cancel
+              </button>
+              <button
+                className="logout-modal-confirm"
+                onClick={handleConfirmLogout}
+                disabled={isLoggingOut}
+              >
+                {isLoggingOut ? (
+                  <>
+                    <span className="logout-modal-spinner"></span>
+                    Logging Out...
+                  </>
+                ) : (
+                  'Yes, Logout'
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

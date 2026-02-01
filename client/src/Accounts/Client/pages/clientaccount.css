@@ -385,3 +385,231 @@
     gap: 6px;
   }
 }
+
+
+
+/* Logout Modal Styles */
+.logout-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.logout-modal {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logout-modal-header {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+}
+
+.logout-modal-icon {
+  font-size: 24px;
+  margin-right: 12px;
+  opacity: 0.8;
+}
+
+.logout-modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  flex: 1;
+}
+
+.logout-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.logout-modal-close:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.logout-modal-close:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.logout-modal-body {
+  padding: 24px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.logout-modal-subtext {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+.logout-modal-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.logout-modal-cancel,
+.logout-modal-confirm {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.logout-modal-cancel {
+  background: white;
+  color: #4b5563;
+  border: 2px solid #e5e7eb;
+}
+
+.logout-modal-cancel:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.logout-modal-cancel:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.logout-modal-confirm {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.logout-modal-confirm:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.logout-modal-confirm:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.logout-modal-confirm:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.logout-modal-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Navigation Logout Styles */
+.clac-nav-link.logging-out {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.clac-nav-logout-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: auto;
+}
+
+.clac-nav-item:last-child .clac-nav-link {
+  color: #ef4444;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 4px;
+  padding-top: 12px;
+}
+
+.clac-nav-item:last-child .clac-nav-link:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.clac-nav-item:last-child .clac-nav-link.active {
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
+}
+
+/* Disabled states */
+.clac-hamburger-btn:disabled,
+.clac-nav-link:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile logout button */
+@media (max-width: 768px) {
+  .clac-nav-item:last-child .clac-nav-link {
+    background: rgba(239, 68, 68, 0.05);
+  }
+  
+  .logout-modal {
+    width: 95%;
+    margin: 16px;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
