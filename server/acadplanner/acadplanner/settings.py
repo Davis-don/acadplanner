@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from datetime import timedelta   # ✅ ADDED
 
 
 # --------------------------------------------------
@@ -45,12 +46,17 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',  # ✅ ADDED (safe + recommended)
 
     'users',
     'classes',
+    'subjects',
 ]
 
 
+# --------------------------------------------------
+# MIDDLEWARE
+# --------------------------------------------------
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -110,18 +116,10 @@ DATABASES = {
 # PASSWORD VALIDATION
 # --------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 
@@ -162,16 +160,47 @@ CORS_ALLOWED_ORIGINS = [
 
 
 # --------------------------------------------------
-# DJANGO REST FRAMEWORK & JWT
+# DJANGO REST FRAMEWORK
 # --------------------------------------------------
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'users.authentication.CookieJWTAuthentication',  # ✅ USE COOKIE AUTH
     ),
 }
 
 
-# # --------------------------------------------------
-# # SECURITY (FOR DEPLOYMENT / PROXIES)
-# # --------------------------------------------------
+# --------------------------------------------------
+# SIMPLE JWT CONFIGURATION
+# (Effectively "stay logged in until logout")
+# --------------------------------------------------
+SIMPLE_JWT = {
+    # Access token lives long enough to avoid constant refresh
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=12),
+
+    # Refresh token lives VERY long
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+
+    # Rotate refresh tokens on use
+    "ROTATE_REFRESH_TOKENS": True,
+
+    # Invalidate old refresh tokens
+    "BLACKLIST_AFTER_ROTATION": True,
+
+    "AUTH_HEADER_TYPES": ("Bearer",),
+
+    "UPDATE_LAST_LOGIN": True,
+}
+
+
+# --------------------------------------------------
+# SESSION / COOKIE BEHAVIOR
+# (Does NOT auto-expire while browser is open)
+# --------------------------------------------------
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # ✅ stay logged in
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30   # ✅ 30 days
+
+
+# --------------------------------------------------
+# SECURITY (FOR DEPLOYMENT / PROXIES)
+# --------------------------------------------------
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
