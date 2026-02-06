@@ -1,0 +1,135 @@
+/* ===== DASHBOARD CONTENT STYLES ===== */
+.db-overall-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeIn 0.8s ease-out;
+  min-height: calc(100vh - 200px);
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Status Messages */
+.db-status-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 16px;
+  animation: slideIn 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.db-status-warning {
+  background: linear-gradient(135deg, 
+    rgba(255, 248, 225, 0.9) 0%,
+    rgba(255, 236, 179, 0.9) 100%);
+  border-left: 4px solid #ff9800;
+}
+
+.db-status-icon {
+  font-size: 2rem;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.db-status-content {
+  flex: 1;
+}
+
+.db-status-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff6f00;
+}
+
+.db-status-description {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.db-status-description strong {
+  color: #ff9800;
+  font-weight: 600;
+}
+
+.db-status-close {
+  background: rgba(255, 152, 0, 0.1);
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #ff9800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.db-status-close:hover {
+  background: rgba(255, 152, 0, 0.2);
+  transform: rotate(90deg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .db-overall-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .db-status-message {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .db-status-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}

@@ -1,6 +1,6 @@
 import './clientaccount.css';
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../../../store/useToaststore';
 import DashboardContent from '../components/Dashboardcontent';
@@ -9,6 +9,8 @@ import ProfileContent from '../components/Profilecontent';
 import ClassesContent from '../components/Classcontent';
 import SubjectsContent from '../components/Subjectcontent';
 import TeachersContent from '../components/Teacherscontent';
+import InstitutionContent from '../components/InstitutuionalContent';
+import AllocationContent from '../components/Allocationcontent';
 import Walletbalance from '../components/Walletbalance';
 
 // Define the type for navigation items
@@ -21,6 +23,15 @@ type NavItem = {
   requiresAuth?: boolean;
 };
 
+interface UserProfile {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  role: string;
+  institution_name: string | null;
+}
+
 function Clientaccount() {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
@@ -28,7 +39,30 @@ function Clientaccount() {
   const { showToast } = useToast();
   const navigate = useNavigate();
 
-  const apiUrl = import.meta.env.VITE_API_URL ;
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
+  // Fetch user profile for header
+  const fetchUserProfile = async (): Promise<{ user: UserProfile }> => {
+    const response = await fetch(`${apiUrl}/users/fetch_user_profile/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch user profile');
+    }
+
+    return response.json();
+  };
+
+  const { data: userData, isLoading: userLoading, error: userError } = useQuery({
+    queryKey: ['userProfileForHeader'],
+    queryFn: fetchUserProfile,
+    retry: 1,
+  });
 
   // Logout mutation using TanStack Query
   const logoutMutation = useMutation({
@@ -73,22 +107,34 @@ function Clientaccount() {
     },
   });
 
-  // Navigation items configuration with all components
+  // Navigation items configuration with Institution and Allocation tabs
   const navItems: NavItem[] = [
     { 
       id: 'dashboard', 
       label: 'Dashboard', 
       icon: '📊', 
       component: DashboardContent,
-      badge: 3,
+      requiresAuth: true
+    },
+    { 
+      id: 'institution', 
+      label: 'Institution', 
+      icon: '🏫', 
+      component: InstitutionContent,
+      requiresAuth: true
+    },
+    { 
+      id: 'allocation', 
+      label: 'Allocation', 
+      icon: '📍', 
+      component: AllocationContent,
       requiresAuth: true
     },
     { 
       id: 'classes', 
       label: 'Classes', 
-      icon: '🏫', 
+      icon: '🎒', 
       component: ClassesContent,
-      badge: 2,
       requiresAuth: true
     },
     { 
@@ -154,11 +200,46 @@ function Clientaccount() {
   const ActiveComponent = navItems.find(item => item.id === activeTab)?.component || DashboardContent;
   const isLoggingOut = logoutMutation.isPending;
 
+  // Get user name from fetched data
+  const getUserName = () => {
+    if (userLoading) return "Loading...";
+    if (userError) return "User";
+    
+    const user = userData?.user;
+    if (user) {
+      return `${user.first_name || ''} ${user.last_name || ''}`.trim() || user.email.split('@')[0];
+    }
+    return "User";
+  };
+
+  // Get user initials for avatar
+  const getUserInitials = () => {
+    if (userLoading) return "U";
+    if (userError) return "U";
+    
+    const user = userData?.user;
+    if (user) {
+      const firstName = user.first_name || '';
+      const lastName = user.last_name || '';
+      if (firstName && lastName) {
+        return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+      }
+      if (firstName) return firstName.charAt(0).toUpperCase();
+      if (lastName) return lastName.charAt(0).toUpperCase();
+      return user.email.charAt(0).toUpperCase();
+    }
+    return "U";
+  };
+
   // Get the subtitle based on active tab
   const getSubtitle = () => {
     switch (activeTab) {
       case 'dashboard':
         return 'Overview of your academic planning activities';
+      case 'institution':
+        return 'Manage your institution settings';
+      case 'allocation':
+        return 'Manage resource and teacher allocations';
       case 'classes':
         return 'Manage and organize your classes and sections';
       case 'subjects':
@@ -195,8 +276,16 @@ function Clientaccount() {
           <Walletbalance />
           
           <div className="clac-user-info">
-            <div className="clac-avatar">JD</div>
-            <span className="clac-user-name">John Doe</span>
+            <div className={`clac-avatar ${userLoading ? 'clac-avatar-loading' : ''}`}>
+              {userLoading ? (
+                <div className="clac-avatar-spinner"></div>
+              ) : (
+                getUserInitials()
+              )}
+            </div>
+            <span className={`clac-user-name ${userLoading ? 'clac-user-name-loading' : ''}`}>
+              {getUserName()}
+            </span>
           </div>
         </div>
       </header>
@@ -223,7 +312,24 @@ function Clientaccount() {
               <li className="clac-nav-section">
                 <span className="clac-nav-section-label">Management</span>
               </li>
-              {navItems.filter(item => ['dashboard', 'classes', 'subjects', 'teachers', 'timetables'].includes(item.id)).map((item) => (
+              {navItems.filter(item => ['dashboard', 'institution', 'allocation'].includes(item.id)).map((item) => (
+                <li key={item.id} className="clac-nav-item">
+                  <button
+                    className={`clac-nav-link ${activeTab === item.id ? 'active' : ''}`}
+                    onClick={() => handleNavClick(item.id)}
+                    disabled={isLoggingOut}
+                  >
+                    <span className="clac-nav-icon">{item.icon}</span>
+                    <span className="clac-nav-label">{item.label}</span>
+                  </button>
+                </li>
+              ))}
+
+              {/* Academic Resources */}
+              <li className="clac-nav-section">
+                <span className="clac-nav-section-label">Resources</span>
+              </li>
+              {navItems.filter(item => ['classes', 'subjects', 'teachers', 'timetables'].includes(item.id)).map((item) => (
                 <li key={item.id} className="clac-nav-item">
                   <button
                     className={`clac-nav-link ${activeTab === item.id ? 'active' : ''}`}
@@ -277,30 +383,7 @@ function Clientaccount() {
                 {navItems.find(item => item.id === activeTab)?.label || 'Dashboard'}
               </h1>
               <div className="clac-content-actions">
-                {/* {activeTab === 'classes' && (
-                  <button className="clac-action-btn">
-                    <span className="clac-action-icon">+</span>
-                    Add Class
-                  </button>
-                )} */}
-                {activeTab === 'subjects' && (
-                  <button className="clac-action-btn">
-                    <span className="clac-action-icon">+</span>
-                    Add Subject
-                  </button>
-                )}
-                {activeTab === 'teachers' && (
-                  <button className="clac-action-btn">
-                    <span className="clac-action-icon">+</span>
-                    Add Teacher
-                  </button>
-                )}
-                {activeTab === 'timetables' && (
-                  <button className="clac-action-btn">
-                    <span className="clac-action-icon">+</span>
-                    Create Timetable
-                  </button>
-                )}
+                {/* Action buttons can be added here */}
               </div>
             </div>
             <p className="clac-content-subtitle">{getSubtitle()}</p>

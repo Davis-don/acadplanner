@@ -1,13 +1,42 @@
-/* dashboardcontent.css */
-
 /* ===== DASHBOARD CONTENT STYLES ===== */
 .db-overall-container {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
   animation: db-fadeIn 0.8s ease-out;
+  min-height: calc(100vh - 200px);
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
 }
 
+/* Status Messages */
+.db-status-message {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  animation: slideDown 0.3s ease-out;
+  margin-top: var(--spacing-sm);
+}
+
+.db-status-warning {
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  border: 1px solid #ffb300;
+  color: #ff6f00;
+}
+
+.db-status-success {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border: 1px solid #4caf50;
+  color: #2e7d32;
+}
+
+/* Animation */
 @keyframes db-fadeIn {
   from {
     opacity: 0;
@@ -16,5 +45,35 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .db-overall-container {
+    padding: var(--spacing-md);
+    gap: var(--spacing-lg);
+  }
+  
+  .db-status-message {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .db-overall-container {
+    padding: var(--spacing-sm);
   }
 }
