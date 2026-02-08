@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AddSubjectComponent from "./Addsubjectcomponent";
 import AllSubjectsComponent from "./AllSubjectComponent";
-import './subjectcontent.css'
+import './subjectcontent.css';
 
 function SubjectContent() {
   const [activeTab, setActiveTab] = useState("allSubjects");
@@ -119,6 +119,7 @@ function SubjectContent() {
           {isLoading && (
             <div className="subject-content-loading-overlay">
               <div className="subject-content-spinner" aria-label="Loading" />
+              <span className="subject-content-loading-text">Loading subjects...</span>
             </div>
           )}
 

@@ -1,0 +1,509 @@
+.add-allocation-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.add-allocation-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.add-allocation-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.add-allocation-header p {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Progress Steps */
+.allocation-progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.allocation-progress-steps::before {
+  content: '';
+  position: absolute;
+  top: 1.25rem;
+  left: 3rem;
+  right: 3rem;
+  height: 2px;
+  background-color: #e5e7eb;
+  z-index: 1;
+}
+
+.allocation-progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-width: 5rem;
+}
+
+.allocation-progress-step-circle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  border: 2px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.allocation-progress-step.active .allocation-progress-step-circle {
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+  color: white;
+}
+
+.allocation-progress-step.current .allocation-progress-step-circle {
+  background-color: white;
+  border-color: #7c3aed;
+  color: #7c3aed;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+}
+
+.allocation-progress-step-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.allocation-progress-step.active .allocation-progress-step-label {
+  color: #7c3aed;
+  font-weight: 500;
+}
+
+/* Summary */
+.allocation-summary {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  border-left: 4px solid #7c3aed;
+}
+
+.allocation-summary-item {
+  font-size: 0.875rem;
+  color: #4b5563;
+  white-space: nowrap;
+}
+
+.allocation-summary-item strong {
+  color: #1f2937;
+  margin-right: 0.5rem;
+}
+
+/* Step Content */
+.allocation-step-content {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.allocation-step {
+  min-height: auto;
+}
+
+.allocation-step h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.allocation-step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.allocation-back-button {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.allocation-back-button:hover {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+/* Lessons Input */
+.allocation-lessons-input {
+  width: 100%;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.allocation-lessons-input label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.75rem;
+}
+
+.allocation-input-hint {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-left: 0.5rem;
+  font-weight: normal;
+}
+
+.allocation-lessons-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.allocation-lessons-decrement,
+.allocation-lessons-increment {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid #d1d5db;
+  background-color: white;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.allocation-lessons-decrement:hover:not(:disabled),
+.allocation-lessons-increment:hover:not(:disabled) {
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+.allocation-lessons-decrement:disabled,
+.allocation-lessons-increment:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.allocation-lessons-input-field {
+  flex: 1;
+  height: 3rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+  color: #1f2937;
+  outline: none;
+  transition: border-color 0.2s ease;
+  min-width: 0;
+}
+
+.allocation-lessons-input-field:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.allocation-lessons-visual {
+  margin-top: 2rem;
+  overflow-x: auto;
+}
+
+.allocation-lessons-bars {
+  display: flex;
+  gap: 1px;
+  margin-bottom: 0.5rem;
+  height: 2.5rem;
+  min-width: 40rem;
+}
+
+.allocation-lessons-bar {
+  flex: 1;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 0.5rem;
+}
+
+.allocation-lessons-bar.filled {
+  background-color: #7c3aed;
+}
+
+.allocation-lessons-bar:hover {
+  transform: translateY(-2px);
+}
+
+.allocation-lessons-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  min-width: 40rem;
+}
+
+/* Actions */
+.allocation-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.allocation-cancel-button {
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  color: #4b5563;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.allocation-cancel-button:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.allocation-submit-button {
+  padding: 0.75rem 2rem;
+  background-color: #7c3aed;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.allocation-submit-button:hover:not(:disabled) {
+  background-color: #6d28d9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.allocation-submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.allocation-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: allocationSpin 1s linear infinite;
+}
+
+@keyframes allocationSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .add-allocation-container {
+    overflow-y: auto;
+  }
+
+  .allocation-progress-steps {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .allocation-progress-steps::before {
+    display: none;
+  }
+
+  .allocation-progress-step {
+    flex-direction: row;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .allocation-progress-step-circle {
+    margin-bottom: 0;
+  }
+
+  .allocation-summary {
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-x: auto;
+  }
+
+  .allocation-step-content {
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .allocation-step-header {
+    flex-wrap: wrap;
+  }
+
+  .allocation-lessons-control {
+    flex-wrap: nowrap;
+  }
+
+  .allocation-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .allocation-cancel-button,
+  .allocation-submit-button {
+    flex: 1;
+    min-width: 8rem;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .allocation-lessons-visual {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .allocation-lessons-bars,
+  .allocation-lessons-legend {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .allocation-step-header h3 {
+    font-size: 1.125rem;
+  }
+
+  .allocation-back-button {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .allocation-actions {
+    flex-direction: column;
+  }
+
+  .allocation-cancel-button,
+  .allocation-submit-button {
+    width: 100%;
+  }
+}
+
+
+/* Error message styling */
+.allocation-error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 6px;
+  color: #991b1b;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.allocation-error-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #dc2626;
+}
+
+/* Updated summary with lessons */
+.allocation-summary-item {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.allocation-summary-item strong {
+  color: #374151;
+  margin-right: 6px;
+}
+
+/* Spinner animation */
+.allocation-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: allocation-spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes allocation-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Validation improvements */
+.allocation-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.allocation-lessons-input-field:invalid {
+  border-color: #ef4444;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .allocation-summary {
+    font-size: 13px;
+  }
+  
+  .allocation-summary-item {
+    margin-bottom: 4px;
+  }
+}

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'classes',
     'subjects',
     'teachers',
+    'allocation',
 ]
 
 

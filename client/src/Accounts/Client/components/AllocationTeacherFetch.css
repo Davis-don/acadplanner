@@ -1,0 +1,380 @@
+.allocation-teacher-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+}
+
+.allocation-teacher-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.allocation-teacher-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.allocation-teacher-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.allocation-teacher-count {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.allocation-teacher-refresh-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.allocation-teacher-refresh-btn:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.allocation-teacher-refresh-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Table Container */
+.allocation-teacher-table-container {
+  flex: 1;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+/* Table */
+.allocation-teacher-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 600px;
+}
+
+.allocation-teacher-table-header {
+  background-color: #f9fafb;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.allocation-teacher-table-header:first-child {
+  border-top-left-radius: 0.5rem;
+}
+
+.allocation-teacher-table-header:last-child {
+  border-top-right-radius: 0.5rem;
+}
+
+.allocation-teacher-table-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.allocation-teacher-table-row:last-child {
+  border-bottom: none;
+}
+
+.allocation-teacher-table-row:hover {
+  background-color: #f9fafb;
+}
+
+.allocation-teacher-table-row:active {
+  background-color: #f3f4f6;
+}
+
+.allocation-teacher-table-cell {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.allocation-teacher-table-row:last-child .allocation-teacher-table-cell {
+  border-bottom: none;
+}
+
+/* Teacher Info Cell */
+.teacher-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 200px;
+}
+
+.allocation-teacher-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.375rem;
+  background-color: #7c3aed;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.allocation-teacher-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.allocation-teacher-name {
+  font-weight: 500;
+  color: #1f2937;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.allocation-teacher-code {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  padding: 0.25rem 0.5rem;
+  background-color: #f3f4f6;
+  border-radius: 0.25rem;
+  display: inline-block;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.allocation-teacher-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.allocation-teacher-select-btn {
+  padding: 0.375rem 0.75rem;
+  background-color: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.allocation-teacher-select-btn:hover {
+  background-color: #6d28d9;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.allocation-teacher-select-btn:active {
+  transform: translateY(0);
+}
+
+/* Loading State */
+.allocation-teacher-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  height: 100%;
+}
+
+.allocation-teacher-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid #e5e7eb;
+  border-top-color: #7c3aed;
+  border-radius: 50%;
+  animation: allocationSpin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes allocationSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.allocation-teacher-loading-text {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Error State */
+.allocation-teacher-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  height: 100%;
+  text-align: center;
+}
+
+.allocation-teacher-error-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #ef4444;
+  margin-bottom: 1rem;
+}
+
+.allocation-teacher-error-message {
+  color: #374151;
+  margin-bottom: 1.5rem;
+  max-width: 400px;
+}
+
+.allocation-teacher-retry-btn {
+  padding: 0.5rem 1.5rem;
+  background-color: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.allocation-teacher-retry-btn:hover {
+  background-color: #6d28d9;
+}
+
+/* Empty State */
+.allocation-teacher-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  height: 100%;
+  text-align: center;
+}
+
+.allocation-teacher-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.allocation-teacher-empty-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.allocation-teacher-empty-message {
+  color: #6b7280;
+  max-width: 400px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .allocation-teacher-container {
+    overflow-x: auto;
+  }
+
+  .allocation-teacher-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .allocation-teacher-table {
+    min-width: 100%;
+  }
+
+  .allocation-teacher-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .allocation-teacher-header-right {
+    justify-content: space-between;
+  }
+
+  .allocation-teacher-table-cell {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .teacher-info {
+    min-width: 150px;
+  }
+
+  .allocation-teacher-code {
+    max-width: 80px;
+    font-size: 0.75rem;
+    padding: 0.125rem 0.375rem;
+  }
+
+  .allocation-teacher-select-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.6875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .allocation-teacher-title {
+    font-size: 1rem;
+  }
+
+  .allocation-teacher-table-header {
+    font-size: 0.6875rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .allocation-teacher-table-cell {
+    padding: 0.375rem 0.5rem;
+  }
+
+  .allocation-teacher-avatar {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .teacher-info {
+    gap: 0.5rem;
+  }
+
+  .allocation-teacher-name {
+    font-size: 0.75rem;
+  }
+}

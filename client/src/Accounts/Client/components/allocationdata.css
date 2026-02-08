@@ -1,0 +1,120 @@
+.allocation-data-container {
+  padding: 16px;
+}
+
+.allocation-data-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.allocation-data-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.allocation-data-count {
+  font-size: 14px;
+  color: #7c3aed;
+  background-color: rgba(124, 58, 237, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.allocation-data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.allocation-data-card {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.allocation-data-card:hover {
+  border-color: #7c3aed;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.allocation-data-card:hover .allocation-data-select {
+  opacity: 1;
+}
+
+.allocation-data-avatar {
+  width: 48px;
+  height: 48px;
+  background-color: #7c3aed;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.allocation-data-color-badge {
+  width: 8px;
+  height: 48px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.allocation-data-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(124, 58, 237, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.allocation-data-icon {
+  width: 24px;
+  height: 24px;
+  stroke: #7c3aed;
+}
+
+.allocation-data-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.allocation-data-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.allocation-data-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+}
+
+.allocation-data-description {
+  font-size: 13

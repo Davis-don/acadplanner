@@ -1,0 +1,352 @@
+/* Allocation Class Fetch Component Styles */
+.allocation-class-container {
+  padding: 20px;
+}
+
+.allocation-class-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.allocation-class-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.allocation-class-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.allocation-class-count {
+  font-size: 14px;
+  color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.allocation-class-refresh-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.allocation-class-refresh-btn:hover {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.allocation-class-refresh-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Table Styles */
+.allocation-class-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.allocation-class-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.allocation-class-table-header {
+  padding: 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.allocation-class-table-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.allocation-class-table-row:hover {
+  background-color: #f9fafb;
+}
+
+.allocation-class-table-cell {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+.class-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 200px;
+}
+
+.allocation-class-icon {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #3b82f6;
+}
+
+.allocation-class-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.allocation-class-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.allocation-class-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.allocation-class-stream-badge {
+  font-size: 14px;
+  font-weight: 500;
+  color: #059669;
+  background-color: rgba(5, 150, 105, 0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.allocation-class-date {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.allocation-class-select-btn {
+  padding: 6px 12px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.allocation-class-select-btn:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.allocation-class-select-btn:active {
+  transform: translateY(0);
+}
+
+/* Loading State */
+.allocation-class-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.allocation-class-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f4f6;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: allocationClassSpin 1s linear infinite;
+}
+
+.allocation-class-loading-text {
+  margin-top: 16px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+@keyframes allocationClassSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error State */
+.allocation-class-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.allocation-class-error-icon {
+  width: 48px;
+  height: 48px;
+  color: #ef4444;
+  margin-bottom: 16px;
+}
+
+.allocation-class-error-message {
+  color: #6b7280;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+
+.allocation-class-retry-btn {
+  padding: 8px 20px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.allocation-class-retry-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Empty State */
+.allocation-class-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.allocation-class-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.allocation-class-empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.allocation-class-empty-message {
+  color: #6b7280;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .allocation-class-container {
+    padding: 16px;
+  }
+  
+  .allocation-class-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .allocation-class-header-right {
+    align-self: flex-end;
+  }
+  
+  .allocation-class-table-container {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  
+  .allocation-class-table-cell {
+    padding: 12px;
+  }
+  
+  .class-info {
+    min-width: 150px;
+  }
+  
+  .allocation-class-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .allocation-class-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .allocation-class-name {
+    font-size: 13px;
+  }
+  
+  .allocation-class-stream-badge {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  
+  .allocation-class-date {
+    font-size: 12px;
+  }
+  
+  .allocation-class-select-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .allocation-class-container {
+    padding: 12px;
+  }
+  
+  .allocation-class-title {
+    font-size: 16px;
+  }
+  
+  .allocation-class-count {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+  
+  .allocation-class-refresh-icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .allocation-class-table-cell {
+    padding: 10px 8px;
+  }
+}
