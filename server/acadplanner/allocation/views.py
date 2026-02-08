@@ -203,3 +203,33 @@ def delete_allocation(request, allocation_id):
             {"error": "Allocation not found"},
             status=status.HTTP_404_NOT_FOUND
         )
+
+
+
+# UPDATE PASSWORD
+# =========================================
+@api_view(['PATCH'])
+@authentication_classes([CookieJWTAuthentication])
+@permission_classes([IsAuthenticated])
+def update_password(request):
+
+    serializer = UpdatePasswordSerializer(
+        data=request.data,
+        context={'request': request}
+    )
+
+    if serializer.is_valid():
+
+        serializer.save()
+
+        return Response(
+            {
+                "message": "Password updated successfully"
+            },
+            status=status.HTTP_200_OK
+        )
+
+    return Response(
+        serializer.errors,
+        status=status.HTTP_400_BAD_REQUEST
+    )

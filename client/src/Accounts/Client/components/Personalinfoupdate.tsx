@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '../../../store/useToaststore';
 import type { FormEvent, ChangeEvent } from 'react';
-import './Personalinfoupdate.css';
+import './personalinfoupdate.css'
 
 interface UserProfile {
   email: string;

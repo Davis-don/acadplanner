@@ -367,12 +367,12 @@ function Clientaccount() {
           </nav>
 
           {/* Sidebar Footer */}
-          <div className="clac-sidebar-footer">
+          {/* <div className="clac-sidebar-footer">
             <div className="clac-account-summary">
               <div className="clac-account-role">Client Account</div>
               <div className="clac-account-plan">Premium Plan</div>
             </div>
-          </div>
+          </div> */}
         </aside>
 
         {/* Content Area */}

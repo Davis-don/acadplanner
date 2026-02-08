@@ -17,7 +17,8 @@ from .serializers import (
     UserSerializer,
     UserUpdateSerializer,
     CustomTokenObtainPairSerializer,
-    InstitutionSerializer
+    InstitutionSerializer,
+    UpdatePasswordSerializer  # ADD THIS IMPORT
 )
 
 from .authentication import CookieJWTAuthentication
@@ -157,6 +158,31 @@ def update_user_profile(request):
                     "first_name": user.first_name,
                     "last_name": user.last_name,
                 }
+            },
+            status=status.HTTP_200_OK
+        )
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# ============================
+# UPDATE PASSWORD VIEW
+# ============================
+@api_view(['POST'])
+@authentication_classes([CookieJWTAuthentication])
+@permission_classes([IsAuthenticated])
+def update_password(request):
+    """
+    Update user password
+    """
+    serializer = UpdatePasswordSerializer(data=request.data, context={'request': request})
+    
+    if serializer.is_valid():
+        serializer.save()
+        
+        return Response(
+            {
+                "message": "Password updated successfully"
             },
             status=status.HTTP_200_OK
         )

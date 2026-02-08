@@ -8,7 +8,8 @@ from .views import (
     logout_user, 
     update_or_create_institution, 
     fetch_user_profile,
-    update_user_profile
+    update_user_profile,
+    update_password  # Add this import
 )
 
 urlpatterns = [
@@ -20,4 +21,5 @@ urlpatterns = [
     path("update_institution/", update_or_create_institution, name="update_institution"),
     path("fetch_user_profile/", fetch_user_profile, name="fetch_user_profile"),
     path("update_profile/", update_user_profile, name="update_profile"),
+    path("update_password/", update_password, name="update_password"),  # Add this line
 ]
