@@ -1,3 +1,4 @@
+# users/serializers.py
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
@@ -35,6 +36,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         extra_kwargs = {
             "password": {"write_only": True},
+            "role": {"read_only": True},
         }
 
 
@@ -98,6 +100,50 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+# =========================================================
+# USER UPDATE SERIALIZER
+# Used for:
+# - Updating email, first_name, last_name
+# =========================================================
+class UserUpdateSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = ["email", "first_name", "last_name"]
+    
+    def validate_email(self, value):
+        """
+        Validate email uniqueness
+        """
+        value = value.strip().lower()
+        
+        # Check if email is being changed
+        if self.instance and self.instance.email != value:
+            # Check if email already exists
+            if User.objects.filter(email=value).exclude(id=self.instance.id).exists():
+                raise serializers.ValidationError("A user with this email already exists.")
+        
+        return value
+    
+    def validate_first_name(self, value):
+        """Validate first name"""
+        value = value.strip()
+        if not value:
+            raise serializers.ValidationError("First name cannot be empty.")
+        if len(value) > 100:
+            raise serializers.ValidationError("First name cannot exceed 100 characters.")
+        return value
+    
+    def validate_last_name(self, value):
+        """Validate last name"""
+        value = value.strip()
+        if not value:
+            raise serializers.ValidationError("Last name cannot be empty.")
+        if len(value) > 100:
+            raise serializers.ValidationError("Last name cannot exceed 100 characters.")
+        return value
 
 
 # =========================================================

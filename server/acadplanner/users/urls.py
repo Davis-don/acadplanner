@@ -1,6 +1,15 @@
+# users/urls.py
 from django.urls import path
-from .views import New_user, CustomTokenObtainPairView, check_auth, logout_user,update_or_create_institution,fetch_user_profile
 from rest_framework_simplejwt.views import TokenRefreshView
+from .views import (
+    New_user, 
+    CustomTokenObtainPairView, 
+    check_auth, 
+    logout_user, 
+    update_or_create_institution, 
+    fetch_user_profile,
+    update_user_profile
+)
 
 urlpatterns = [
     path('new_account/', New_user, name='new_user'),
@@ -10,4 +19,5 @@ urlpatterns = [
     path('logout/', logout_user, name='logout_user'),
     path("update_institution/", update_or_create_institution, name="update_institution"),
     path("fetch_user_profile/", fetch_user_profile, name="fetch_user_profile"),
+    path("update_profile/", update_user_profile, name="update_profile"),
 ]

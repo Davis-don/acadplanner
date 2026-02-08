@@ -1,3 +1,4 @@
+# users/views.py
 from rest_framework.decorators import (
     api_view,
     authentication_classes,
@@ -14,6 +15,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import (
     UserSerializer,
+    UserUpdateSerializer,
     CustomTokenObtainPairSerializer,
     InstitutionSerializer
 )
@@ -131,10 +133,40 @@ def check_auth(request):
 
 
 # ============================
+# UPDATE USER PROFILE VIEW
+# ============================
+@api_view(['PATCH'])
+@authentication_classes([CookieJWTAuthentication])
+@permission_classes([IsAuthenticated])
+def update_user_profile(request):
+    """
+    Update user profile (email, first_name, last_name)
+    """
+    user = request.user
+    
+    serializer = UserUpdateSerializer(user, data=request.data, partial=True)
+    
+    if serializer.is_valid():
+        serializer.save()
+        
+        return Response(
+            {
+                "message": "Profile updated successfully",
+                "user": {
+                    "email": user.email,
+                    "first_name": user.first_name,
+                    "last_name": user.last_name,
+                }
+            },
+            status=status.HTTP_200_OK
+        )
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# ============================
 # UPDATE INSTITUTION VIEW
 # ============================
-# users/views.py
-
 @api_view(['PATCH', 'PUT'])
 @authentication_classes([CookieJWTAuthentication])
 @permission_classes([IsAuthenticated])
@@ -184,7 +216,6 @@ def update_or_create_institution(request):
         },
         status=status.HTTP_200_OK
     )
-
 
 
 # ============================
