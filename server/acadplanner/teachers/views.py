@@ -38,27 +38,33 @@ def add_teacher(request):
 
 
 # ============================
-# ✅ GET ALL TEACHERS FOR LOGGED-IN USER
+# ✅ GET ALL TEACHERS FOR LOGGED-IN USER (SMALLEST TO LARGEST CODE)
 # ============================
 @api_view(['GET'])
 @authentication_classes([CookieJWTAuthentication])
 @permission_classes([IsAuthenticated])
 def get_user_teachers(request):
     """
-    Get all Teacher objects created by the currently logged-in user.
+    Get all Teacher objects created by the currently logged-in user,
+    sorted from smallest teacher code to largest teacher code.
     """
     user = request.user
-    teachers = Teacher.objects.filter(created_by=user).order_by('-created_at')
+
+    teachers = Teacher.objects.filter(
+        created_by=user
+    ).order_by('teacher_code')  # ascending order
+
     serializer = TeacherSerializer(teachers, many=True)
 
     return Response(
         {
             "message": "Teachers retrieved successfully",
             "teachers": serializer.data,
-            "count": len(serializer.data)
+            "count": teachers.count()
         },
         status=status.HTTP_200_OK
     )
+
 
 
 # ============================
@@ -143,6 +149,77 @@ def delete_teacher(request, teacher_id):
     return Response(
         {
             "message": "Teacher deleted successfully"
+        },
+        status=status.HTTP_200_OK
+    )
+
+
+
+# ============================
+# ✅ ALLOCATE TEACHER
+# ============================
+@api_view(['PATCH'])
+@authentication_classes([CookieJWTAuthentication])
+@permission_classes([IsAuthenticated])
+def allocate_teacher(request, teacher_id):
+    """
+    Set allocated = True for a teacher.
+    """
+    user = request.user
+
+    try:
+        teacher = Teacher.objects.get(
+            teacher_id=teacher_id,
+            created_by=user
+        )
+    except Teacher.DoesNotExist:
+        return Response(
+            {"error": "Teacher not found or you do not have permission"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    teacher.allocated = True
+    teacher.save(update_fields=["allocated", "updated_at"])
+
+    return Response(
+        {
+            "message": "Teacher allocated successfully",
+            "teacher": TeacherSerializer(teacher).data
+        },
+        status=status.HTTP_200_OK
+    )
+
+
+# ============================
+# ✅ DEALLOCATE TEACHER
+# ============================
+@api_view(['PATCH'])
+@authentication_classes([CookieJWTAuthentication])
+@permission_classes([IsAuthenticated])
+def deallocate_teacher(request, teacher_id):
+    """
+    Set allocated = False for a teacher.
+    """
+    user = request.user
+
+    try:
+        teacher = Teacher.objects.get(
+            teacher_id=teacher_id,
+            created_by=user
+        )
+    except Teacher.DoesNotExist:
+        return Response(
+            {"error": "Teacher not found or you do not have permission"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    teacher.allocated = False
+    teacher.save(update_fields=["allocated", "updated_at"])
+
+    return Response(
+        {
+            "message": "Teacher deallocated successfully",
+            "teacher": TeacherSerializer(teacher).data
         },
         status=status.HTTP_200_OK
     )

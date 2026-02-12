@@ -12,26 +12,36 @@ class Teacher(models.Model):
         editable=False,
         unique=True
     )
+
     teacher_name = models.CharField(
         max_length=100
     )
+
     teacher_code = models.CharField(
         max_length=20
     )
+
+    # ✅ NEW FIELD: allocated (True or False)
+    allocated = models.BooleanField(
+        default=False
+    )
+
     created_by = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name="teachers"
     )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
+
     updated_at = models.DateTimeField(
         auto_now=True
     )
 
     class Meta:
-        ordering = ["teacher_name"]
+        ordering = ["teacher_code"]  # smallest → largest by code
         unique_together = ("teacher_code", "created_by")
 
     def __str__(self):

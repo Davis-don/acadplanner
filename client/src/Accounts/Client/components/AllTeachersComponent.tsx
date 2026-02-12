@@ -256,6 +256,30 @@ function AllTeachersComponent() {
     setEditFormData(prev => ({ ...prev, [key]: processedValue }));
   };
 
+  // Sort teachers by teacher_code numerically
+  const sortTeachersByCode = (teachers: Teacher[]): Teacher[] => {
+    return [...teachers].sort((a, b) => {
+      // Try to parse as integers for numeric comparison
+      const numA = parseInt(a.teacher_code, 10);
+      const numB = parseInt(b.teacher_code, 10);
+      
+      // If both are valid numbers, sort numerically
+      if (!isNaN(numA) && !isNaN(numB)) {
+        return numA - numB;
+      }
+      
+      // If one is a number and the other isn't, numbers come first
+      if (!isNaN(numA) && isNaN(numB)) return -1;
+      if (isNaN(numA) && !isNaN(numB)) return 1;
+      
+      // If neither are numbers, do alphanumeric sort
+      return a.teacher_code.localeCompare(b.teacher_code, undefined, {
+        numeric: true,
+        sensitivity: 'base'
+      });
+    });
+  };
+
   useEffect(() => {
     setIsLoading(queryLoading);
   }, [queryLoading]);
@@ -270,6 +294,7 @@ function AllTeachersComponent() {
   }, [queryError, showToast]);
 
   const teachers = teachersData?.teachers || [];
+  const sortedTeachers = sortTeachersByCode(teachers);
   const isDeleting = deleteTeacherMutation.isPending;
   const isUpdating = updateTeacherMutation.isPending;
 
@@ -280,7 +305,7 @@ function AllTeachersComponent() {
           <div className="all-teachers-header-content">
             <h1 className="all-teachers-title">My Teachers</h1>
             <div className="all-teachers-count">
-              {teachers.length} teacher{teachers.length !== 1 ? 's' : ''}
+              {sortedTeachers.length} teacher{sortedTeachers.length !== 1 ? 's' : ''}
             </div>
           </div>
           
@@ -316,7 +341,7 @@ function AllTeachersComponent() {
             <div className="all-teachers-loading-spinner"></div>
             <div className="all-teachers-loading-text">Loading teachers...</div>
           </div>
-        ) : teachers.length === 0 ? (
+        ) : sortedTeachers.length === 0 ? (
           <div className="all-teachers-empty">
             <div className="all-teachers-empty-icon">👨‍🏫</div>
             <div className="all-teachers-empty-title">No teachers found</div>
@@ -337,7 +362,7 @@ function AllTeachersComponent() {
                 </tr>
               </thead>
               <tbody>
-                {teachers.map((teacher) => (
+                {sortedTeachers.map((teacher) => (
                   <tr key={teacher.teacher_id} className="all-teachers-table-row">
                     {editingTeacher?.teacher_id === teacher.teacher_id ? (
                       // Edit mode

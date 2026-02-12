@@ -378,3 +378,372 @@
     font-size: 0.75rem;
   }
 }
+
+
+
+
+
+
+
+
+
+/* Add these styles to your existing CSS file */
+
+/* Stats Section */
+.allocation-teacher-stats {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+}
+
+.allocation-teacher-stat-unallocated {
+  color: #059669;
+  background-color: #d1fae5;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  font-weight: 500;
+}
+
+.allocation-teacher-stat-allocated {
+  color: #b45309;
+  background-color: #fed7aa;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  font-weight: 500;
+}
+
+/* Allocated Teacher Row Styling */
+.allocation-teacher-table-row.teacher-allocated {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  opacity: 0.9;
+}
+
+.allocation-teacher-table-row.teacher-allocated:hover {
+  background-color: #fee2e2;
+}
+
+/* Avatar Styling for Allocated */
+.avatar-allocated {
+  background-color: #dc2626 !important;
+  opacity: 0.9;
+}
+
+/* Text Styling for Allocated */
+.text-allocated {
+  color: #991b1b !important;
+  font-weight: 600;
+}
+
+.code-allocated {
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+  border: 1px solid #fecaca;
+}
+
+/* Allocated Badge */
+.allocation-teacher-badge {
+  display: inline-block;
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 600;
+  padding: 0.125rem 0.375rem;
+  border-radius: 1rem;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+/* Checkbox Styles */
+.allocation-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.allocation-checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  padding: 0.5rem;
+}
+
+.allocation-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.allocation-checkbox-custom {
+  position: relative;
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: white;
+  border: 2px solid #d1d5db;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.allocation-checkbox-custom:hover {
+  border-color: #7c3aed;
+}
+
+.allocation-checkbox:checked + .allocation-checkbox-custom {
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+}
+
+.allocation-checkbox:checked + .allocation-checkbox-custom::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.allocation-checkbox:disabled + .allocation-checkbox-custom {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.allocation-checkbox:disabled:checked + .allocation-checkbox-custom {
+  background-color: #9ca3af;
+  border-color: #9ca3af;
+}
+
+/* Disabled Select Button */
+.allocation-teacher-select-btn.btn-disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.allocation-teacher-select-btn.btn-disabled:hover {
+  background-color: #d1d5db;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Separator for Allocated Section */
+.allocation-teacher-allocated-separator {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #fef2f2;
+  color: #991b1b;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-top: 2px solid #fee2e2;
+  border-bottom: 2px solid #fee2e2;
+}
+
+.allocation-teacher-allocated-separator span {
+  background-color: #ef4444;
+  color: white;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+  font-size: 0.625rem;
+}
+
+/* Responsive Updates */
+@media (max-width: 768px) {
+  .allocation-teacher-stats {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .allocation-teacher-stat-unallocated,
+  .allocation-teacher-stat-allocated {
+    font-size: 0.6875rem;
+    padding: 0.125rem 0.375rem;
+  }
+  
+  .allocation-checkbox-custom {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .allocation-checkbox:checked + .allocation-checkbox-custom::after {
+    left: 4px;
+    top: 0px;
+    width: 5px;
+    height: 9px;
+  }
+}
+
+/* Animation for Allocation Toggle */
+@keyframes allocationPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(124, 58, 237, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+  }
+}
+
+.allocation-checkbox:checked + .allocation-checkbox-custom {
+  animation: allocationPulse 0.4s ease-out;
+}
+
+/* Focus States */
+.allocation-checkbox:focus + .allocation-checkbox-custom {
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+  border-color: #7c3aed;
+}
+
+/* Tooltip for Disabled Buttons */
+.allocation-teacher-select-btn.btn-disabled[title] {
+  position: relative;
+}
+
+/* Section Labels (optional - for visual separation) */
+.allocation-teacher-unallocated-label,
+.allocation-teacher-allocated-label {
+  display: none; /* Hidden by default, can be enabled if needed */
+}
+
+
+
+
+/* Add these styles to prevent row click on allocated teachers */
+
+.allocation-teacher-table-row.row-selectable:hover {
+  background-color: #f9fafb;
+}
+
+.allocation-teacher-table-row.teacher-allocated {
+  cursor: default !important;
+  opacity: 0.9;
+}
+
+.allocation-teacher-table-row.teacher-allocated:hover {
+  background-color: #fef2f2 !important;
+}
+
+/* Ensure checkbox and button clicks don't trigger row click */
+.allocation-checkbox-wrapper,
+.allocation-teacher-select-btn {
+  position: relative;
+  z-index: 2;
+}
+
+/* Make the checkbox and button click areas more explicit */
+.allocation-checkbox-label {
+  display: inline-flex;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.allocation-checkbox-label:hover {
+  background-color: rgba(124, 58, 237, 0.04);
+}
+
+.allocation-teacher-select-btn {
+  position: relative;
+  z-index: 3;
+}
+
+/* Prevent text selection on double click */
+.allocation-teacher-table-cell {
+  user-select: none;
+}
+
+/* Visual indicator that allocated rows are not selectable */
+.teacher-allocated .teacher-info .allocation-teacher-details {
+  opacity: 0.8;
+}
+
+.teacher-allocated .allocation-teacher-name {
+  color: #991b1b;
+}
+
+/* Add a subtle "not-allowed" cursor for allocated rows */
+.teacher-allocated .allocation-teacher-table-cell:not(.allocation-checkbox-wrapper):not(:last-child) {
+  cursor: not-allowed;
+}
+
+/* Keep pointer cursor for interactive elements in allocated rows */
+.teacher-allocated .allocation-checkbox-label,
+.teacher-allocated .allocation-teacher-select-btn {
+  cursor: pointer;
+}
+
+.teacher-allocated .allocation-teacher-select-btn.btn-disabled {
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .allocation-checkbox-label {
+    padding: 0.375rem;
+  }
+  
+  .allocation-checkbox-label:hover {
+    background-color: transparent;
+  }
+}
+
+
+
+/* Add to your existing AllocationTeacherFetch.css */
+
+/* Refreshing state */
+.allocation-teacher-refresh-btn.refreshing {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.allocation-teacher-refresh-icon.spin {
+  animation: refreshSpin 1s linear infinite;
+}
+
+@keyframes refreshSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mutation pending state */
+.allocation-teacher-table-row.mutation-pending {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.allocation-teacher-table-row.mutation-pending .allocation-checkbox-label,
+.allocation-teacher-table-row.mutation-pending .allocation-teacher-select-btn {
+  cursor: wait;
+}
+
+/* Disabled button during mutation */
+.allocation-teacher-select-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.allocation-teacher-select-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
