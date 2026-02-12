@@ -12,6 +12,7 @@ import TeachersContent from '../components/Teacherscontent';
 import InstitutionContent from '../components/InstitutuionalContent';
 import AllocationContent from '../components/Allocationcontent';
 import Walletbalance from '../components/Walletbalance';
+import Templatecontent from '../components/Templatecontent';
 
 // Define the type for navigation items
 type NavItem = {
@@ -107,7 +108,7 @@ function Clientaccount() {
     },
   });
 
-  // Navigation items configuration with Institution and Allocation tabs
+  // Navigation items configuration with Template tab
   const navItems: NavItem[] = [
     { 
       id: 'dashboard', 
@@ -149,6 +150,13 @@ function Clientaccount() {
       label: 'Teachers', 
       icon: '👨‍🏫', 
       component: TeachersContent,
+      requiresAuth: true
+    },
+    { 
+      id: 'templates', 
+      label: 'Templates', 
+      icon: '📋', 
+      component: Templatecontent,
       requiresAuth: true
     },
     { 
@@ -246,6 +254,8 @@ function Clientaccount() {
         return 'View and manage all academic subjects';
       case 'teachers':
         return 'Browse and manage teacher information';
+      case 'templates':
+        return 'Create and manage your timetable templates';
       case 'timetables':
         return 'Manage and view your timetables';
       case 'profile':
@@ -329,7 +339,7 @@ function Clientaccount() {
               <li className="clac-nav-section">
                 <span className="clac-nav-section-label">Resources</span>
               </li>
-              {navItems.filter(item => ['classes', 'subjects', 'teachers', 'timetables'].includes(item.id)).map((item) => (
+              {navItems.filter(item => ['classes', 'subjects', 'teachers', 'templates', 'timetables'].includes(item.id)).map((item) => (
                 <li key={item.id} className="clac-nav-item">
                   <button
                     className={`clac-nav-link ${activeTab === item.id ? 'active' : ''}`}
@@ -338,6 +348,7 @@ function Clientaccount() {
                   >
                     <span className="clac-nav-icon">{item.icon}</span>
                     <span className="clac-nav-label">{item.label}</span>
+                    {item.badge && <span className="clac-nav-badge">{item.badge}</span>}
                   </button>
                 </li>
               ))}

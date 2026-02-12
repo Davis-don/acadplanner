@@ -24,4 +24,5 @@ urlpatterns = [
     path('subjects/', include('subjects.urls')),
     path('teachers/', include('teachers.urls')),
     path('allocations/', include('allocation.urls')),
+    path('timetables/', include('timetable.urls')), # ✅ ADDED
 ]
