@@ -1,0 +1,224 @@
+/* previewtemplate.css */
+
+.preview-template-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #f8fafc;
+  min-height: calc(100vh - 64px);
+}
+
+/* Header Styles */
+.preview-template-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #e2e8f0;
+  background-color: #ffffff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.preview-template-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preview-template-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.preview-template-stats {
+  display: flex;
+  gap: 16px;
+}
+
+.preview-template-stat {
+  font-size: 14px;
+  color: #64748b;
+  background-color: #f8fafc;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.preview-template-header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.preview-template-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preview-template-refresh-btn:hover:not(:disabled) {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.preview-template-refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.preview-template-refresh-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Content Layout */
+.preview-template-content {
+  width: 100%;
+}
+
+/* Loading State */
+.preview-template-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 48px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.preview-template-loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.preview-template-loading-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.preview-template-loading-subtext {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* Error State */
+.preview-template-error {
+  text-align: center;
+  padding: 60px 24px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #fecaca;
+  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.1);
+}
+
+.preview-template-error-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.preview-template-error-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #991b1b;
+  margin-bottom: 8px;
+}
+
+.preview-template-error-message {
+  font-size: 16px;
+  color: #b91c1c;
+  margin-bottom: 24px;
+}
+
+.preview-template-error-retry-btn {
+  padding: 12px 32px;
+  background-color: #ef4444;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preview-template-error-retry-btn:hover:not(:disabled) {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3);
+}
+
+.preview-template-error-retry-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .preview-template-container {
+    padding: 16px;
+  }
+
+  .preview-template-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .preview-template-header-content {
+    width: 100%;
+  }
+
+  .preview-template-stats {
+    flex-wrap: wrap;
+  }
+
+  .preview-template-header-actions {
+    width: 100%;
+  }
+
+  .preview-template-refresh-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .preview-template-loading {
+    padding: 32px 16px;
+  }
+
+  .preview-template-loading-text {
+    font-size: 16px;
+    text-align: center;
+  }
+}

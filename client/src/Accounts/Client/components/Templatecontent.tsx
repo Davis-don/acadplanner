@@ -2,14 +2,7 @@ import { useState } from 'react';
 import Template from "./Template";
 import './templatecontent.css';
 import EditTemplate from './Edittemplate';
-
-const PreviewTemplate = () => (
-  <div className="template-content-preview-grid">
-    <div className="template-content-preview-card">
-      {/* Preview component will be populated with real data */}
-    </div>
-  </div>
-);
+import PreviewTemplate from './PreviewTemplate';
 
 type TemplateView = 'new' | 'edit' | 'preview';
 

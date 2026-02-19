@@ -1,0 +1,371 @@
+/* overalltemplate.css */
+
+.overall-template-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* Controls */
+.overall-template-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.overall-template-day-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.overall-template-day-selector label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.overall-template-day-select {
+  padding: 8px 16px;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #0f172a;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.overall-template-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.overall-template-pdf-btn,
+.overall-template-download-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.overall-template-pdf-btn {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.overall-template-pdf-btn:hover {
+  background-color: #2563eb;
+}
+
+.overall-template-download-btn {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+.overall-template-download-btn:hover {
+  background-color: #059669;
+}
+
+/* PDF Viewer */
+.overall-template-pdf-viewer {
+  width: 100%;
+  height: 800px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* HTML Preview - A4 Landscape Style */
+.overall-template-preview {
+  background-color: #ffffff;
+  border: 2px solid #1e293b;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.overall-template-preview-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #1e293b;
+}
+
+.overall-template-preview-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.overall-template-preview-subtitle {
+  font-size: 16px;
+  color: #475569;
+  margin: 0;
+}
+
+.overall-template-preview-day {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 20px;
+  padding: 12px;
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  border: 1px solid #94a3b8;
+}
+
+/* Timetable Grid */
+.overall-template-grid-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 2px solid #1e293b;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+.overall-template-grid {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.overall-template-grid-row {
+  display: flex;
+  border-bottom: 2px solid #1e293b;
+  min-height: 50px;
+}
+
+.overall-template-grid-row:last-child {
+  border-bottom: none;
+}
+
+.overall-template-grid-header {
+  background-color: #e5e7eb;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 3px solid #1e293b;
+}
+
+.overall-template-grid-cell {
+  padding: 12px 8px;
+  border-right: 2px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+  font-size: 14px;
+  flex: 1;
+  text-align: center;
+}
+
+.overall-template-grid-cell:last-child {
+  border-right: none;
+}
+
+/* Class column - fixed width but will stretch */
+.overall-template-class-header,
+.overall-template-class-cell {
+  flex: 0 0 120px;
+  background-color: #f3f4f6;
+  font-weight: 700;
+  color: #0f172a;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  box-shadow: 2px 0 5px -2px rgba(0, 0, 0, 0.2);
+  font-size: 15px;
+}
+
+/* Lesson headers */
+.overall-template-lesson-header {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.overall-template-lesson-number {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.overall-template-lesson-time {
+  font-size: 12px;
+  color: #4b5563;
+}
+
+/* Break headers - spans full height visually */
+.overall-template-break-header {
+  background-color: #fef3c7;
+  color: #92400e;
+  font-weight: 600;
+  border-left: 2px solid #92400e;
+  border-right: 2px solid #92400e;
+}
+
+.overall-template-break-name {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
+  color: #92400e;
+  text-transform: uppercase;
+}
+
+.overall-template-break-time {
+  font-size: 12px;
+  color: #b45309;
+}
+
+/* Break cells - all rows in break column have same styling */
+.overall-template-break-cell {
+  background-color: #fef3c7;
+  color: #92400e;
+  border-left: 2px solid #92400e;
+  border-right: 2px solid #92400e;
+  font-weight: 500;
+}
+
+.overall-template-break-content {
+  font-size: 13px;
+  font-weight: 600;
+  color: #92400e;
+  text-transform: uppercase;
+}
+
+/* Lesson cells */
+.overall-template-lesson-cell {
+  background-color: #ffffff;
+  color: #4b5563;
+}
+
+.overall-template-lesson-content {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Empty State */
+.overall-template-empty {
+  text-align: center;
+  padding: 80px 24px;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  border: 3px dashed #94a3b8;
+}
+
+.overall-template-empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.overall-template-empty-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.overall-template-empty-message {
+  font-size: 16px;
+  color: #64748b;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Print Styles */
+@media print {
+  .overall-template-controls {
+    display: none;
+  }
+  
+  .overall-template-preview {
+    border: none;
+    padding: 0;
+    box-shadow: none;
+  }
+  
+  .overall-template-grid-wrapper {
+    border: 2px solid #000;
+    overflow: visible;
+  }
+  
+  .overall-template-grid-cell {
+    border-color: #000;
+    border-width: 1px;
+  }
+  
+  .overall-template-grid-header {
+    background-color: #f0f0f0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .overall-template-break-header,
+  .overall-template-break-cell {
+    background-color: #fff3cd !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .overall-template-class-header,
+  .overall-template-class-cell {
+    background-color: #f0f0f0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .overall-template-controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .overall-template-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .overall-template-pdf-btn,
+  .overall-template-download-btn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .overall-template-preview {
+    padding: 15px;
+  }
+  
+  .overall-template-preview-title {
+    font-size: 22px;
+  }
+  
+  .overall-template-grid-cell {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  
+  .overall-template-class-header,
+  .overall-template-class-cell {
+    flex: 0 0 100px;
+  }
+}
